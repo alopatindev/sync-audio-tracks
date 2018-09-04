@@ -94,5 +94,5 @@ int Sound::computeDelay(const Sound& other) {
     fftw_free(in);
     fftw_free(out);
 
-    return maxid > fftsize / 2 ? fftsize - maxid : maxid;
+    return maxid > fftsize / 2 ? maxid - fftsize : maxid;
 }

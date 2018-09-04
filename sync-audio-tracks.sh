@@ -14,6 +14,11 @@ GOOD_SOUND="$1"
 BAD_SOUND="$2"
 OUTPUT="$3"
 
+abs ()
+{
+    echo "${1#-}"
+}
+
 downsample_and_cut ()
 {
     ffmpeg -y -hide_banner -loglevel error -i "$1" -ab 8 -ar 8000 -t 900 -map 0:a -ac 1 -vn "$2"
@@ -26,7 +31,8 @@ insert_silence ()
 
 remove_beginning ()
 {
-    sox --no-show-progress --no-dither "$1" "$2" trim "$3"
+    offset=$(abs "$3")
+    sox --no-show-progress --no-dither "$1" "$2" trim "$offset"
 }
 
 TMPDIR=$(mktemp -d /var/tmp/tmp.XXXXXXXXXX)
@@ -39,14 +45,11 @@ downsample_and_cut "${BAD_SOUND}" "${TMP_BAD_SOUND}"
 
 OFFSET=$(${COMPUTE_OFFSET} "${TMP_GOOD_SOUND}" "${TMP_BAD_SOUND}")
 echo "offset is ${OFFSET} seconds"
-insert_silence "${GOOD_SOUND}" "${OUTPUT}" "${OFFSET}"
 
-# FIXME: compute_sound_offset doesn't determine offset sign
-TMP_OUTPUT="${TMPDIR}/$(basename ${OUTPUT}).wav"
-downsample_and_cut "${OUTPUT}" "${TMP_OUTPUT}"
-NEW_OFFSET=$(${COMPUTE_OFFSET} "${TMP_OUTPUT}" "${TMP_BAD_SOUND}")
-if (( $(echo "${NEW_OFFSET} > ${OFFSET}" | bc -l) )) ; then
+if (( $(echo "${OFFSET} < 0" | bc -l) )) ; then
     remove_beginning "${GOOD_SOUND}" "${OUTPUT}" "${OFFSET}"
+else
+    insert_silence "${GOOD_SOUND}" "${OUTPUT}" "${OFFSET}"
 fi
 
 rm -rf "${TMPDIR}"
