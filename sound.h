@@ -1,39 +1,30 @@
-#ifndef WAV_UTILS_HH
-#define WAV_UTILS_HH
+#ifndef SOUND_H
+#define SOUND_H
 
 #include <complex>
-#include <tuple>
-#include <list>
 #include <vector>
-#include <memory>
 
 #include <fftw3.h>
+#include <sndfile.h>
 
-struct Sound {
-    Sound(const std::string& filename)
-      : channels(0), frames(0), samplerate(0), samples(0x0), fft(0x0), fftsize(0)
-    {
-        read(filename);
-    }
+using Complex = std::complex<double>;
 
-    ~Sound() {
-        free(samples);
-        fftw_free(fft);
-    }
+class Sound {
+public:
+    Sound(const std::string& filename);
 
-    void addFFT(int fftsize);
-    int computeDelay(const Sound& other);
-
-    int channels;
-    int frames;
-    int samplerate;
+    sf_count_t computeDelayInFrames(const Sound& other) const;
+    double computeDelayInSeconds(const Sound& other) const;
 
 private:
-    double* samples;
-    std::complex<double>* fft;
-    int fftsize;
+    Complex* computeFFT(const sf_count_t fftSize) const;
+    Complex* newBuffer(const sf_count_t fftSize) const;
+    sf_count_t argmax(const Complex* const buffer, const sf_count_t size) const;
 
-    void read(const std::string& filename);
+    int channels;
+    sf_count_t frames;
+    int sampleRate;
+    std::vector<double> samples;
 };
 
 #endif
