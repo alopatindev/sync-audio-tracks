@@ -10,3 +10,8 @@ It calculates a delay between two audios and produces a shifted audio.
 - fftw
 - libsndfile
 - sox
+
+# License
+[Apache 2.0](LICENSE.txt)
+
+Copyright (C) 2018 Alexander Lopatin
