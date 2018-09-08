@@ -6,7 +6,6 @@ It calculates a delay between two audios and produces a shifted audio.
 `./sync-audio-tracks.sh good_audio_from_recorder.wav bad_audio_from_camera.wav out.wav`
 
 # Dependencies
-- boost
 - ffmpeg
 - fftw
 - libsndfile

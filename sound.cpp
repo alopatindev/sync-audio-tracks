@@ -4,11 +4,6 @@
 #include <sndfile.h>
 
 #include <iostream>
-#include <iomanip>
-
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <boost/foreach.hpp>
 
 void Sound::read(const std::string& filename) {
     SF_INFO sfinfo;
@@ -75,19 +70,13 @@ int Sound::computeDelay(const Sound& other) {
     }
     fftw_execute(p_backward);
 
-    boost::accumulators::accumulator_set<
-        double,
-        boost::accumulators::features<
-            boost::accumulators::stats<boost::accumulators::tag::variance, boost::accumulators::tag::max>
-        >
-    > acc;
-
     int maxid = 0;
-    for (int i = 0; i < fftsize; i++) {
+    double maxmag = std::abs(out[maxid]);
+    for (int i = 1; i < fftsize; i++) {
         const double mag = std::abs(out[i]);
-        acc(mag);
-        if (mag == boost::accumulators::max(acc)) {
+        if (mag > maxmag) {
             maxid = i;
+            maxmag = mag;
         }
     }
 
