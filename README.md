@@ -5,6 +5,9 @@ It calculates a delay between two audios and produces a shifted audio.
 # Usage
 `./sync-audio-tracks.sh good_audio_from_recorder.wav bad_audio_from_camera.wav out.wav`
 
+# Supported Formats
+They depend on how SoX and FFmpeg were built for your OS ([more details](https://github.com/alopatindev/sync-audio-tracks/issues/2#issuecomment-421603812)).
+
 # Dependencies
 - ffmpeg
 - fftw
