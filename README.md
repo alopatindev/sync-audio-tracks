@@ -1,5 +1,5 @@
 # Sync Audio Tracks
-This code is based on [Miles McCoo's](https://www.mmccoo.com) [cross-correlation implementation](https://nerd.mmccoo.com/2017/06/19/automatically-aligning-multiple-videoaudio-clips-in-kdenlive/).
+This code is based on [Miles McCoo's cross-correlation implementation](https://web.archive.org/web/20170916044116/https://nerd.mmccoo.com/2017/06/19/automatically-aligning-multiple-videoaudio-clips-in-kdenlive/).
 It calculates a delay between two audios and produces a shifted audio.
 
 ## Supported Formats
@@ -7,16 +7,16 @@ They depend on how SoX and FFmpeg were built for your OS ([more details](https:/
 
 ## Installation
 Make sure these dependences are installed:
-- ffmpeg
-- fftw
-- libsndfile
-- sox
+- ffmpeg (tested with 4.1.3)
+- fftw (tested with 3.3.6_p2)
+- libsndfile (tested with 1.0.28)
+- sox (tested with 14.4.2)
 
-Some packages may need to be installed together with `-dev` packages (for instance `fftw` with `fftw-dev` on Debian).
+On Debian some packages may need to be installed together with `-dev` packages (for instance `fftw` with `fftw-dev`).
 
 Now compile it with
 ```
-make
+make -j
 ```
 
 ## Usage
