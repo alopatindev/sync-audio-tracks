@@ -7,6 +7,8 @@ They depend on how SoX and FFmpeg were built for your OS ([more details](https:/
 
 ## Installation
 Make sure these dependences are installed:
+- bash (tested with 4.4.23)
+- bc (tested with 1.06.95)
 - ffmpeg (tested with 4.1.3)
 - fftw (tested with 3.3.6_p2)
 - libsndfile (tested with 1.0.28)
