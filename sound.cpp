@@ -81,6 +81,7 @@ sf_count_t Sound::computeDelayInFrames(const Sound& other) const {
         delayFrames -= fftSize;
     }
 
+    fftw_destroy_plan(plan);
     fftw_free(fft);
     fftw_free(fftOther);
     fftw_free(in);
