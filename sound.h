@@ -18,6 +18,7 @@ public:
 
 private:
     Complex* computeFFT(const sf_count_t fftSize) const;
+    static void applyFFT(Complex* in, Complex* out, const sf_count_t fftSize, bool inverse);
     Complex* newBuffer(const sf_count_t fftSize) const;
     sf_count_t argmax(const Complex* const buffer, const sf_count_t size) const;
 

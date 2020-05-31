@@ -27,14 +27,6 @@ Complex* Sound::computeFFT(const sf_count_t fftSize) const {
     Complex* in = newBuffer(fftSize);
     Complex* out = newBuffer(fftSize);
 
-    fftw_plan plan = fftw_plan_dft_1d(
-        fftSize,
-        reinterpret_cast<fftw_complex*>(in),
-        reinterpret_cast<fftw_complex*>(out),
-        FFTW_FORWARD,
-        FFTW_ESTIMATE
-    );
-
     for (sf_count_t i = 0; i < frames; i++) {
         in[i] = samples[i * channels];
     }
@@ -43,9 +35,8 @@ Complex* Sound::computeFFT(const sf_count_t fftSize) const {
         in[i] = 0;
     }
 
-    fftw_execute(plan);
+    applyFFT(in, out, fftSize, false);
 
-    fftw_destroy_plan(plan);
     fftw_free(in);
 
     return out;
@@ -60,18 +51,11 @@ sf_count_t Sound::computeDelayInFrames(const Sound& other) const {
     Complex* in = newBuffer(fftSize);
     Complex* out = newBuffer(fftSize);
 
-    fftw_plan plan = fftw_plan_dft_1d(
-        fftSize,
-        reinterpret_cast<fftw_complex*>(in),
-        reinterpret_cast<fftw_complex*>(out),
-        FFTW_BACKWARD,
-        FFTW_ESTIMATE
-    );
-
     for (sf_count_t i = 0; i < fftSize; i++) {
         in[i] = std::conj(fft[i]) * fftOther[i];
     }
-    fftw_execute(plan);
+
+    applyFFT(in, out, fftSize, true);
 
     const sf_count_t frameWithMaxCorrelation = argmax(out, fftSize);
 
@@ -81,13 +65,24 @@ sf_count_t Sound::computeDelayInFrames(const Sound& other) const {
         delayFrames -= fftSize;
     }
 
-    fftw_destroy_plan(plan);
     fftw_free(fft);
     fftw_free(fftOther);
     fftw_free(in);
     fftw_free(out);
 
     return delayFrames;
+}
+
+void Sound::applyFFT(Complex* in, Complex* out, const sf_count_t fftSize, bool inverse) {
+    fftw_plan plan = fftw_plan_dft_1d(
+        fftSize,
+        reinterpret_cast<fftw_complex*>(in),
+        reinterpret_cast<fftw_complex*>(out),
+        inverse ? FFTW_BACKWARD : FFTW_FORWARD,
+        FFTW_ESTIMATE
+    );
+    fftw_execute(plan);
+    fftw_destroy_plan(plan);
 }
 
 double Sound::computeDelayInSeconds(const Sound& other) const {
