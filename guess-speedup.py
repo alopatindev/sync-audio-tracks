@@ -36,19 +36,21 @@ def get_duration(filename):
     duration = float(getoutput('ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 %s 2>>/dev/null' % filename))
     return duration
 
+def get_half_of_duration(filename):
+    duration = get_duration(filename)
+    return duration / 2.
+
 def divide(filename):
     return left(filename), right(filename)
 
 def left(filename):
-    duration = get_duration(filename)
-    half = duration / 2.
+    half = get_half_of_duration(filename)
     left_filename = create_temp_wav_file()
     os.system('{0} -i {1} -t {2} {3}'.format(FFMPEG, filename, half, left_filename))
     return left_filename
 
 def right(filename):
-    duration = get_duration(filename)
-    half = duration / 2.
+    half = get_half_of_duration(filename)
     right_filename = create_temp_wav_file()
     os.system('{0} -ss {1} -i {2} {3}'.format(FFMPEG, half, filename, right_filename))
     return right_filename
@@ -84,11 +86,6 @@ def guess_duration(filename_with_unknown_duration, filename_b, original_duration
         logging.debug('attempt %d, shift_left %f, shift_right %f, min_duration %f, max_duration %f', attempt, shift_left, shift_right, min_duration, max_duration)
         attempt += 1
     return guessed_duration_a
-
-def speedup_sound(good_sound, speedup):
-    spedup_filename = create_temp_wav_file()
-    os.system('{0} -i {1} -af "atempo={2}" {3}'.format(FFMPEG, good_sound, speedup, spedup_filename))
-    return spedup_filename
 
 logging.basicConfig(level=logging.DEBUG)
 remove_temp_dir()
