@@ -12,6 +12,7 @@ Make sure these dependences are installed:
 - ffmpeg (tested with 4.1.3)
 - fftw (tested with 3.3.6_p2)
 - libsndfile (tested with 1.0.28)
+- python3 (tested with 3.6.10)
 - sox (tested with 14.4.2)
 
 On Debian some packages may need to be installed together with `-dev` packages (for instance `fftw` with `fftw-dev`).
@@ -23,10 +24,12 @@ make -j
 
 ## Usage
 ```
-./sync-audio-tracks.sh good_audio_from_recorder.wav bad_audio_from_camera.wav out.wav
+./sync-audio-tracks.sh good_audio_from_recorder.wav bad_audio_from_camera.wav out.wav 900
 ```
 
-In this example `out.wav` is a shifted version of `good_audio_from_recorder.wav`
+In this example
+- `out.wav` is a shifted version of `good_audio_from_recorder.wav`
+- `900` is sound duration limit for analysis (in seconds)
 
 ## License
 [Apache 2.0](LICENSE.txt)
