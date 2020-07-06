@@ -2,7 +2,10 @@
 This code is based on [Miles McCoo's cross-correlation implementation](https://web.archive.org/web/20170916044116/https://nerd.mmccoo.com/2017/06/19/automatically-aligning-multiple-videoaudio-clips-in-kdenlive/).
 It calculates a delay between two audios and produces a shifted audio.
 
-## Supported Formats
+## Known Limitations
+Paths with spaces and weird characters are **unsupported**.
+
+### Supported Formats
 They depend on how SoX and FFmpeg were built for your OS ([more details](https://github.com/alopatindev/sync-audio-tracks/issues/2#issuecomment-421603812)). If it didn't work with some format for you — try WAV as experiment.
 
 ## Installation
