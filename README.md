@@ -34,6 +34,10 @@ In this example
 - `out.wav` is a shifted version of `good_audio_from_recorder.wav`
 - `900` is sound duration limit for analysis (in seconds)
 
+## Different speed/framerate/framedrops are not supported
+This project is much simpler: it just computes and applies the shift (lossless, without re-encoding) without stretching/spreading parts of audio.
+However something like [that](https://github.com/kaegi/alass) might will help to implement it.
+
 ## License
 [Apache 2.0](LICENSE.txt)
 
