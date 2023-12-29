@@ -36,7 +36,8 @@ In this example
 
 ## Different speed/framerate/framedrops are not supported
 This project is much simpler: it just computes and applies the shift (lossless, without re-encoding) without stretching/spreading parts of audio.
-However something like [that](https://github.com/kaegi/alass) might will help to implement it.
+~~However something like [that](https://github.com/kaegi/alass) might will help to implement it.~~
+Have a look at [AudioAlign](https://github.com/protyposis/AudioAlign), it seems it supports [these scenarios](https://github.com/protyposis/AudioAlign/issues/12#issuecomment-1872321878).
 
 ## License
 [Apache 2.0](LICENSE.txt)
