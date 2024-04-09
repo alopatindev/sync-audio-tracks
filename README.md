@@ -1,3 +1,12 @@
+<div align="center">
+I've gained wisdom from commercial proprietary challenges since 2012<br>
+and switched entirely to my <a href="https://codonaft.com/sponsor" rel="noopener noreferrer" target="_blank">personal projects</a>.<br>
+Free and Open Source Software is my passion.<br>
+I believe it's the shortest way to <del>enlightenment</del> <strong>healthier</strong> products for society ♡
+</div>
+
+---
+
 # Sync Audio Tracks
 This code is based on [Miles McCoo's cross-correlation implementation](https://web.archive.org/web/20170916044116/https://nerd.mmccoo.com/2017/06/19/automatically-aligning-multiple-videoaudio-clips-in-kdenlive/).
 It calculates a delay between two audios and produces a shifted audio.
@@ -38,6 +47,15 @@ In this example
 This project is much simpler: it just computes and applies the shift (lossless, without re-encoding) without stretching/spreading parts of audio.
 ~~However something like [that](https://github.com/kaegi/alass) might will help to implement it.~~
 Have a look at [AudioAlign](https://github.com/protyposis/AudioAlign), it seems it supports [these scenarios](https://github.com/protyposis/AudioAlign/issues/12#issuecomment-1872321878).
+
+## Support
+I'm currently investing [all my time](https://codonaft.com/why) in personal projects and no longer making any income from proprietary commercial projects owned by third-party businesses.
+
+If you found this repo useful and you want to support me, please
+- ⭐ it
+- check [here](https://codonaft.com/sponsor)
+
+Thank you for your support! ❤️ (◕‿◕)
 
 ## License
 [Apache 2.0](LICENSE.txt)
