@@ -39,6 +39,15 @@ This project is much simpler: it just computes and applies the shift (lossless, 
 ~~However something like [that](https://github.com/kaegi/alass) might will help to implement it.~~
 Have a look at [AudioAlign](https://github.com/protyposis/AudioAlign), it seems it supports [these scenarios](https://github.com/protyposis/AudioAlign/issues/12#issuecomment-1872321878).
 
+## Support
+I'm currently investing [all my time](https://codonaft.com/why) in FOSS projects.
+
+If you found this repo useful and you want to support me, please
+- ⭐ it
+- check ⚡ [here](https://codonaft.com/sponsor)
+
+Your support keeps me going ❤️ (◕‿◕)
+
 ## License
 [Apache 2.0](LICENSE.txt)
 
