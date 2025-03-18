@@ -1,0 +1,3 @@
+*.d
+*.o
+compute_sound_offset
